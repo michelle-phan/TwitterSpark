@@ -45,10 +45,14 @@ object TwitterSparkHashTag {
     //   val tags = t.getText.split(" ").filter(_.startsWith("#")).map(_.toLowerCase)
     //   tags.contains("#bigdata") && tags.contains("#food")
     // }
-
+    val now = org.joda.time.DateTime.now()
+    val day = now.getDayOfMonth
+    val month = now.getMonthOfYear
+    val year = now.getYear
+    val name= s"year=$year/month=$month/day=$day/tweets"
     val englishTweets = stream.filter(_.getLang() == "en")
     // englishTweets.print()
-    englishTweets.saveAsTextFiles("output/tweets/tweets", "20000")
+    englishTweets.saveAsTextFiles(s"output/tweets/$name", "json")
 
     ssc.start()
     ssc.awaitTermination()
