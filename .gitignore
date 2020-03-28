@@ -2,4 +2,4 @@
 *.class
 project/
 target/
-output/
+#output/

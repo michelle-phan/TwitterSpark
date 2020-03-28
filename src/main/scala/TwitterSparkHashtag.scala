@@ -5,7 +5,6 @@ import twitter4j.conf.ConfigurationBuilder
 import twitter4j.auth.OAuthAuthorization
 import twitter4j.Status
 import org.apache.spark.streaming.twitter.TwitterUtils
-import java.io.File
 
 object TwitterSparkHashTag {
   def main(args: Array[String]) {
@@ -28,31 +27,32 @@ object TwitterSparkHashTag {
     val auth = new OAuthAuthorization(cb.build)
     val stream = TwitterUtils.createStream(ssc, Some(auth))
 
+    val now = org.joda.time.DateTime.now()
+    val day = now.getDayOfMonth
+    val month = now.getMonthOfYear
+    val year = now.getYear
+    val name= s"year=$year/month=$month/day=$day"
+    val min = now.getSecondOfDay;
+    
     val tags = stream.flatMap { status =>
       status.getHashtagEntities.map(_.getText)
     }
     tags
       .countByValue()
       .foreachRDD { rdd =>
-        val now = org.joda.time.DateTime.now()
         rdd
           .sortBy(_._2)
           .map(x => (x, now))
-          .saveAsTextFile(s"output/hashtags/hashtags_$now")
+          .saveAsTextFile(s"output/hashtags/$name/hashtags-$min")
       }
 
     // val tweets = stream.filter { t =>
     //   val tags = t.getText.split(" ").filter(_.startsWith("#")).map(_.toLowerCase)
     //   tags.contains("#bigdata") && tags.contains("#food")
     // }
-    val now = org.joda.time.DateTime.now()
-    val day = now.getDayOfMonth
-    val month = now.getMonthOfYear
-    val year = now.getYear
-    val name= s"year=$year/month=$month/day=$day/tweets"
     val englishTweets = stream.filter(_.getLang() == "en")
     // englishTweets.print()
-    englishTweets.saveAsTextFiles(s"output/tweets/$name", "json")
+    englishTweets.saveAsTextFiles(s"output/tweets/$name/tweets", "json")
 
     ssc.start()
     ssc.awaitTermination()

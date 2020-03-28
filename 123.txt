@@ -1,0 +1,10 @@
+[info] Loading settings for project twitterspark-build from plugins.sbt ...
+[info] Loading project definition from /Users/michellephan/Documents/NUS/git/TwitterSpark/project
+[info] Loading settings for project twitterspark from build.sbt ...
+[info] Set current project to TwitterSpark (in build file:/Users/michellephan/Documents/NUS/git/TwitterSpark/)
+[warn] insecure HTTP request is deprecated 'http://repository.apache.org/snapshots/'; switch to HTTPS or opt-in as ("apache-snapshots" at "http://repository.apache.org/snapshots/").withAllowInsecureProtocol(true)
+[warn] insecure HTTP request is deprecated 'http://repository.apache.org/snapshots/'; switch to HTTPS or opt-in as ("apache-snapshots" at "http://repository.apache.org/snapshots/").withAllowInsecureProtocol(true)
+[warn] insecure HTTP request is deprecated 'http://repository.apache.org/snapshots/'; switch to HTTPS or opt-in as ("apache-snapshots" at "http://repository.apache.org/snapshots/").withAllowInsecureProtocol(true)
+[info] Strategy 'discard' was applied to 378 files (Run the task at debug level to see details)
+[info] Strategy 'first' was applied to 746 files (Run the task at debug level to see details)
+[success] Total time: 33 s, completed 28 Mar, 2020 12:57:14 AM
